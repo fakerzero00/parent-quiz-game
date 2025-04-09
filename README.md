@@ -53,6 +53,11 @@
       margin-top: 1rem;
       text-align: center;
     }
+    .result img {
+      max-width: 300px;
+      margin: 10px auto;
+      display: block;
+    }
     .restart, .share {
       margin-top: 1.5rem;
       text-align: center;
@@ -85,9 +90,13 @@
     <h1>💐 你是哪類型父母？</h1>
     <div class="question" id="questionText"></div>
     <div class="options" id="options"></div>
-    <div class="result" id="result"></div>
-    <div class="restart" id="restart"></div>
-    <div class="share" id="share"></div>
+    <div class="result" id="result" style="display: none;"></div>
+    <div class="restart" id="restart" style="display: none;">
+      <button onclick="restartQuiz()">再玩一次</button>
+    </div>
+    <div class="share" id="share" style="display: none;">
+      <button onclick="shareToFB()">分享測驗結果到 Facebook</button>
+    </div>
   </div>
 
   <script>
@@ -110,16 +119,7 @@
           { text: "說『先吃飯再說』我不知道，你找其他人或許知道", type: "自由放養型" }
         ]
       },
-      {
-        question: "假日終於有空閒時，你最想做什麼？",
-        options: [
-          { text: "整理家務讓空間舒適", type: "操勞型" },
-          { text: "規劃全家一起出遊", type: "活潑型" },
-          { text: "獨自閱讀或聽音樂", type: "自由放養型" },
-          { text: "買些家人愛吃的東西準備驚喜", type: "溫柔體貼型" },
-          { text: "趕緊關心孩子的作業！", type: "領袖型" }
-        ]
-      }
+      // 其他題目繼續
     ];
 
     let currentQuestionIndex = 0;
@@ -147,6 +147,10 @@
     }
 
     function showResult() {
+      // 隱藏題目與選項
+      document.getElementById('questionText').style.display = 'none';
+      document.getElementById('options').style.display = 'none';
+
       const resultCount = {
         "精打細算型": 0,
         "活潑型": 0,
@@ -157,13 +161,12 @@
         "領袖型": 0,
         "無敵超人型": 0
       };
-      
+
       userAnswers.forEach(answer => {
         resultCount[answer]++;
       });
 
       const maxResult = Object.keys(resultCount).reduce((a, b) => resultCount[a] > resultCount[b] ? a : b);
-      document.getElementById('result').textContent = `你的父母類型是：${maxResult}`;
 
       const resultDesc = {
         "精打細算型": "你是節儉聰明的家長，善於理財，讓家庭生活井井有條。",
@@ -175,26 +178,39 @@
         "領袖型": "你掌握家庭的節奏，善於指引方向。",
         "無敵超人型": "你是萬能的超級家長，什麼事情都難不倒你。"
       };
-      
-      document.getElementById('result').textContent += ` ${resultDesc[maxResult]}`;
 
-      // 添加再玩一次和分享按钮
-      document.getElementById('restart').innerHTML = '<button onclick="restartQuiz()">再玩一次</button>';
-      document.getElementById('share').innerHTML = '<button onclick="shareToFB()">分享至 Facebook</button>';
+      const resultImages = {
+        "精打細算型": "https://i.imgur.com/OKhWlG0.jpeg",
+        "活潑型": "https://i.imgur.com/7iI8gRK.jpeg",
+        "自由放養型": "https://i.imgur.com/IIQWvdb.jpeg",
+        "操勞型": "https://i.imgur.com/FxGHaVD.jpeg",
+        "知識百科型": "https://i.imgur.com/lapOkwj.jpeg",
+        "溫柔體貼型": "https://i.imgur.com/x1borEs.jpeg",
+        "領袖型": "https://i.imgur.com/yzKG7GP.jpeg",
+        "無敵超人型": "https://i.imgur.com/4aqwTmZ.jpeg"
+      };
+
+      document.getElementById('result').innerHTML = `你的父母類型是：${maxResult}<br>${resultDesc[maxResult]}`;
+      document.getElementById('result').innerHTML += `<img src="${resultImages[maxResult]}" alt="${maxResult}" />`;
+      document.getElementById('result').style.display = "block";
+      document.getElementById('restart').style.display = "block";
+      document.getElementById('share').style.display = "block";
     }
 
     function restartQuiz() {
       currentQuestionIndex = 0;
       userAnswers = [];
-      document.getElementById('result').textContent = '';
-      document.getElementById('restart').innerHTML = '';
-      document.getElementById('share').innerHTML = '';
+      document.getElementById('result').style.display = "none";
+      document.getElementById('restart').style.display = "none";
+      document.getElementById('share').style.display = "none";
+      document.getElementById('questionText').style.display = "block";
+      document.getElementById('options').style.display = "block";
       showQuestion();
     }
 
     function shareToFB() {
       const resultText = document.getElementById('result').textContent;
-      const fbShareUrl = `https://www.facebook.com/shengchisteak/?message=${encodeURIComponent(resultText)}`;
+      const fbShareUrl = `https://www.facebook.com/shengchisteak/?quote=${encodeURIComponent(resultText)}`;
       window.open(fbShareUrl, '_blank');
     }
 
