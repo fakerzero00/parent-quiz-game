@@ -87,7 +87,7 @@
 </head>
 <body>
   <div class="container" id="quiz">
-    <h1>💐 你是哪類型父母？</h1>
+    <h1>🎐 你是哪類型父母？</h1>
     <div class="question" id="questionText"></div>
     <div class="options" id="options"></div>
     <div class="result" id="result" style="display: none;"></div>
@@ -95,7 +95,7 @@
       <button onclick="restartQuiz()">再玩一次</button>
     </div>
     <div class="share" id="share" style="display: none;">
-      <button onclick="shareToFB()">分享測驗結果到 Facebook</button>
+      <button onclick="shareToFB()">到 FB 留言參加抽獎</button>
     </div>
   </div>
 
@@ -119,7 +119,33 @@
           { text: "說『先吃飯再說』我不知道，你找其他人或許知道", type: "自由放養型" }
         ]
       },
-      // 其他題目繼續
+      {
+        question: "假日終於有空閒時，你最想做什麼？",
+        options: [
+          { text: "整理家務讓空間舒適", type: "操勞型" },
+          { text: "規劃全家一起出遊", type: "活潑型" },
+          { text: "獨自閱讀或聽音樂", type: "自由放養型" },
+          { text: "買些家人愛吃的東西準備驚喜", type: "溫柔體貼型" },
+          { text: "趕緊關心孩子的作業！", type: "領袖型" }
+        ]
+      },
+      {
+        question: "你對小孩寫功課的態度是？",
+        options: [
+          { text: "嚴格要求、要寫好", type: "領袖型" },
+          { text: "陪在旁邊看他需要幫助嗎", type: "溫柔體貼型" },
+          { text: "讓他自己規劃，學會自主", type: "自由放養型" }
+        ]
+      },
+      {
+        question: "家裡冰箱快空了，週末你會怎麼補貨？",
+        options: [
+          { text: "列清單比價再購買", type: "精打細算型" },
+          { text: "一趟大採購，想吃什麼買什麼", type: "無敵超人型" },
+          { text: "跟孩子一起決定買什麼", type: "溫柔體貼型" },
+          { text: "先去吃外面", type: "自由放養型" }
+        ]
+      }
     ];
 
     let currentQuestionIndex = 0;
@@ -147,7 +173,6 @@
     }
 
     function showResult() {
-      // 隱藏題目與選項
       document.getElementById('questionText').style.display = 'none';
       document.getElementById('options').style.display = 'none';
 
@@ -215,10 +240,6 @@
     }
 
     showQuestion();
-  </script>
-</body>
-</html>
-
   </script>
 </body>
 </html>
