@@ -119,23 +119,6 @@
           { text: "買些家人愛吃的東西準備驚喜", type: "溫柔體貼型" },
           { text: "趕緊關心孩子的作業！", type: "領袖型" }
         ]
-      },
-      {
-        question: "你對小孩寫功課的態度是？",
-        options: [
-          { text: "嚴格要求、要寫好", type: "領袖型" },
-          { text: "陪在旁邊看他需要幫助嗎", type: "溫柔體貼型" },
-          { text: "讓他自己規劃，學會自主", type: "自由放養型" }
-        ]
-      },
-      {
-        question: "家裡冰箱快空了，週末你會怎麼補貨？",
-        options: [
-          { text: "列清單比價再購買", type: "精打細算型" },
-          { text: "一趟大採購，想吃什麼買什麼", type: "無敵超人型" },
-          { text: "跟孩子一起決定買什麼", type: "溫柔體貼型" },
-          { text: "先去吃外面", type: "自由放養型" }
-        ]
       }
     ];
 
@@ -194,7 +177,10 @@
       };
       
       document.getElementById('result').textContent += ` ${resultDesc[maxResult]}`;
+
+      // 添加再玩一次和分享按钮
       document.getElementById('restart').innerHTML = '<button onclick="restartQuiz()">再玩一次</button>';
+      document.getElementById('share').innerHTML = '<button onclick="shareToFB()">分享至 Facebook</button>';
     }
 
     function restartQuiz() {
@@ -202,7 +188,14 @@
       userAnswers = [];
       document.getElementById('result').textContent = '';
       document.getElementById('restart').innerHTML = '';
+      document.getElementById('share').innerHTML = '';
       showQuestion();
+    }
+
+    function shareToFB() {
+      const resultText = document.getElementById('result').textContent;
+      const fbShareUrl = `https://www.facebook.com/shengchisteak/?message=${encodeURIComponent(resultText)}`;
+      window.open(fbShareUrl, '_blank');
     }
 
     showQuestion();
