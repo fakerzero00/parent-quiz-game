@@ -215,7 +215,7 @@
         "無敵超人型": "https://i.imgur.com/4aqwTmZ.jpeg"
       };
 
-      document.getElementById('result').innerHTML = `你的父母類型是：${maxResult}<br>${resultDesc[maxResult]}`;
+      document.getElementById('result').innerHTML = `你是什麼類型的父母？<br><strong>${maxResult}</strong><br>${resultDesc[maxResult]}`;
       document.getElementById('result').innerHTML += `<img src="${resultImages[maxResult]}" alt="${maxResult}" />`;
       document.getElementById('result').style.display = "block";
       document.getElementById('restart').style.display = "block";
@@ -238,6 +238,11 @@
       const fbShareUrl = `https://www.facebook.com/shengchisteak/?quote=${encodeURIComponent(resultText)}`;
       window.open(fbShareUrl, '_blank');
     }
+
+    showQuestion();
+  </script>
+</body>
+</html>
 
     showQuestion();
   </script>
