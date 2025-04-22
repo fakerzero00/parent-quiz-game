@@ -112,6 +112,7 @@
     </div>
     <div class="share" id="share" style="display: none;">
       <button onclick="shareToFB()">到 FB 留言參加抽獎</button>
+      <button onclick="shareToLINE()">分享到 LINE VOOM</button>
     </div>
     <div class="music-controls">
       <audio id="bgMusic" loop autoplay>
@@ -264,7 +265,11 @@
       window.open(fbShareUrl, '_blank');
     }
 
-    // 🎵 音樂功能
+    function shareToLINE() {
+      const lineUrl = `https://linevoom.line.me/post/1174488346563727475`;
+      window.open(lineUrl, '_blank');
+    }
+
     const bgMusic = document.getElementById('bgMusic');
     const volumeSlider = document.getElementById('volumeControl');
     const toggleBtn = document.getElementById('musicToggle');
